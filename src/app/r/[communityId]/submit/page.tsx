@@ -28,7 +28,13 @@ const SubmitPost = ({ params }: Props) => {
                     <Text fontWeight={600}>Create a post</Text>
                 </Box>
                 {user && (
-                    <NewPostForm user={user} communityId={params.communityId} />
+                    <NewPostForm
+                        user={user}
+                        communityId={params.communityId}
+                        communityImageURL={
+                            communityStateValue.currentCommunity.imageURL
+                        }
+                    />
                 )}
             </>
             <>

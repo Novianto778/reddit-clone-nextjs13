@@ -38,6 +38,7 @@ type Props = {
     ) => void;
     onDeletePost: (post: Post) => Promise<boolean>;
     onSelectPost?: (post: Post) => void;
+    homePage?: boolean;
 };
 
 const PostItem = ({
@@ -47,6 +48,7 @@ const PostItem = ({
     onVote,
     onDeletePost,
     onSelectPost,
+    homePage,
 }: Props) => {
     const [loadingImage, setLoadingImage] = useState(true);
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -132,7 +134,7 @@ const PostItem = ({
                             align="center"
                             fontSize="9pt"
                         >
-                            {false && (
+                            {homePage && (
                                 <>
                                     {post.communityImageURL ? (
                                         <Image

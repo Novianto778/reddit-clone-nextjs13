@@ -24,6 +24,7 @@ import useSelectFile from '@hooks/useSelectFile';
 type Props = {
     user: User;
     communityId: string;
+    communityImageURL?: string;
 };
 
 export type TextInputType = {
@@ -58,7 +59,7 @@ export type SelectedTabType = typeof formTabs[number]['title'];
 
 export type TabItemType = typeof formTabs[number];
 
-const NewPostForm = ({ user, communityId }: Props) => {
+const NewPostForm = ({ user, communityId, communityImageURL }: Props) => {
     const router = useRouter();
     const [selectedTab, setSelectedTab] = useState<SelectedTabType>(
         formTabs[0].title
@@ -77,7 +78,7 @@ const NewPostForm = ({ user, communityId }: Props) => {
         // create new post object => type Post
         const newPost: Post = {
             communityId,
-            // communityImageURL: communityImageURL || '',
+            communityImageURL: communityImageURL || '',
             creatorId: user.uid,
             creatorDisplayName: user.email!.split('@')[0],
             title,

@@ -28,20 +28,23 @@ import { useState } from 'react';
 import { BsFillEyeFill, BsFillPersonFill } from 'react-icons/bs';
 import { HiLockClosed } from 'react-icons/hi';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useRouter } from 'next/navigation';
+import useDirectory from '@hooks/useDirectory';
 
 type Props = {
     open: boolean;
     handleClose: () => void;
 };
 
-const 
-CreateCommunityModal = ({ open, handleClose }: Props) => {
+const CreateCommunityModal = ({ open, handleClose }: Props) => {
+    const router = useRouter();
     const [user] = useAuthState(auth);
     const [communityName, setCommunityName] = useState('');
     const [charsRemaining, setCharsRemaining] = useState(21);
     const [error, setError] = useState('');
     const [communityType, setCommunityType] = useState('public');
     const [loading, setLoading] = useState(false);
+    const { toggleMenuOpen } = useDirectory();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.length > 21) return;
@@ -95,7 +98,9 @@ CreateCommunityModal = ({ open, handleClose }: Props) => {
                     }
                 );
             });
-
+            handleClose();
+            toggleMenuOpen();
+            router.push(`/r/${communityName}`);
             // create community
         } catch (error: any) {
             console.log(error);

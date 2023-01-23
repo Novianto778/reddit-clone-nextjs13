@@ -63,6 +63,7 @@ const useCommunityData = (params: Props) => {
             setCommunityStateValue((prevState) => ({
                 ...prevState,
                 mySnippets: snippets as CommunitySnippet[],
+                snippetsFetched: true,
             }));
         } catch (error) {
             console.log('getMySnippets error', error);
@@ -168,6 +169,7 @@ const useCommunityData = (params: Props) => {
             setCommunityStateValue((prevState) => ({
                 ...prevState,
                 mySnippets: [],
+                snippetsFetched: false,
             }));
             return;
         }
